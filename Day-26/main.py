@@ -21,10 +21,20 @@
 # for (index, row) in student_data_frame.iterrows():
 #     print(row.student)
 import pandas
+
 nato_panda = pandas.DataFrame(pandas.read_csv("nato_phonetic_alphabet.csv"))
 nato_dict = {row.letter: row.code for (index, row) in nato_panda.iterrows()}
 
-text_input = input("What's your name? ").upper()
+keep_going = True
 
-for n in text_input:
-    print(f"{n} : {nato_dict[n]}")
+while keep_going:
+    text_input = input("What's your name? ").upper()
+    try:
+        output_list = [nato_dict[letter] for letter in text_input]
+        keep_going = False
+    except KeyError:
+        print("Sorry, you can only enter alphabets")
+    else:
+        print(output_list)
+
+
